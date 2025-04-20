@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Button } from 'react-bootstrap';
+
+import Header from './Components/Header/Header';
+import { StudentProvider } from './Components/Students/StudentContext';
+import StudentForm from './Components/Students/StudentForm';
+import StudentList from './Components/Students/StudentList';
 
 function App() {
+  const [showForm, setShowForm] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <StudentProvider>
+        <Container>
+          <Header />
+          <Button
+            variant="outline-primary"
+            className="d-flex justify-content-center"
+            onClick={() => setShowForm(true)}
+          >
+            Add Student
+          </Button>
+          <StudentList
+            openForm={() => {
+              setShowForm(true);
+            }}
+          />
+          <StudentForm show={showForm} handleClose={() => setShowForm(false)} />{' '}
+        </Container>
+      </StudentProvider>
+    </>
   );
 }
 
