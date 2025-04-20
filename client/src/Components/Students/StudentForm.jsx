@@ -6,19 +6,25 @@ const StudentForm = ({ show, handleClose }) => {
   const { addOrUpdateStudent, studentToEdit, setStudentToEdit } = useStudents();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
     if (studentToEdit) {
       setName(studentToEdit.name);
       setEmail(studentToEdit.email);
+      setPhone(studentToEdit.phone);
     } else {
       setName('');
       setEmail('');
+      setPhone('');
     }
   }, [studentToEdit]);
 
   const onSubmit = () => {
-    addOrUpdateStudent({ name, email });
+    setName('');
+    setEmail('');
+    setPhone('');
+    addOrUpdateStudent({ name, email, phone });
     handleClose();
   };
 
@@ -53,11 +59,19 @@ const StudentForm = ({ show, handleClose }) => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              type="number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button
-          variant="secondary"
+          variant="outline-danger"
           onClick={() => {
             handleClose();
             setStudentToEdit(null);
@@ -65,7 +79,7 @@ const StudentForm = ({ show, handleClose }) => {
         >
           Cancel
         </Button>
-        <Button variant="primary" onClick={onSubmit}>
+        <Button variant="success" onClick={onSubmit}>
           Save
         </Button>
       </Modal.Footer>

@@ -11,6 +11,7 @@ const StudentList = ({ openForm }) => {
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th>Phone</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -19,9 +20,10 @@ const StudentList = ({ openForm }) => {
           <tr key={student._id}>
             <td>{student.name}</td>
             <td>{student.email}</td>
+            <td>{student.phone}</td>
             <td>
               <Button
-                variant="warning"
+                variant="outline-secondary"
                 className="me-2"
                 onClick={() => {
                   editStudent(student);
@@ -31,7 +33,7 @@ const StudentList = ({ openForm }) => {
                 Edit
               </Button>
               <Button
-                variant="danger"
+                variant="outline-danger"
                 onClick={() => deleteStudent(student._id)}
               >
                 Delete

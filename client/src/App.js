@@ -17,7 +17,8 @@ function App() {
           <Header />
           <Button
             variant="outline-primary"
-            className="d-flex justify-content-center"
+            className="d-grid mx-auto"
+            style={{ marginBottom: '15px' }}
             onClick={() => setShowForm(true)}
           >
             Add Student
